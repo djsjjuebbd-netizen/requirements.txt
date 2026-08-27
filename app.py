@@ -41,7 +41,7 @@ channels_col = mongo_db["mandatory_channels"]
 movies_col = mongo_db["movies"]
 
 bot = TeleBot(BOT_TOKEN, parse_mode="HTML", threaded=True)
-flask_app = Flask(__name__)
+app = Flask(__name__)
 admin_states: dict[int, dict[str, Any]] = {}
 
 STYLE_PRIMARY = "primary"
@@ -505,7 +505,7 @@ def run() -> None:
     init_db()
     if PUBLIC_BASE_URL:
         setup_webhook()
-        flask_app.run(host="0.0.0.0", port=PORT)
+        app.run(host="0.0.0.0", port=PORT)
     else:
         bot.remove_webhook()
         bot.infinity_polling(skip_pending=True, timeout=30, long_polling_timeout=30)
