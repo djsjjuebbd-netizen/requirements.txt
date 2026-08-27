@@ -234,14 +234,13 @@ def broadcast_photo(file_id: str, caption: str) -> tuple[int, int]:
         except Exception:
             failed += 1
     return ok, failed
-
-
-@bot.message_handler(commands=["start"])
+    
+    @bot.message_handler(commands=["start"])
 def start(message: types.Message) -> None:
+    print(">>> START BOSILDI!", message.from_user.id)  # <--- Mana shu qatorni qo'shing
     save_user(message.from_user)
     if not require_subscription(message):
         return
-
     args = message.text.split(maxsplit=1)
     if len(args) == 2:
         show_movie_by_code(message.chat.id, args[1].strip())
