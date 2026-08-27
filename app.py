@@ -254,13 +254,18 @@ def broadcast_photo(file_id: str, caption: str) -> tuple[int, int]:
     
 @bot.message_handler(commands=["admin"])
 def admin_panel(message):
-    print(">>> ADMIN BOSILDI!", message.from_user.id) # <--- Mana shu qatorni qo'shing
+    print(">>> ADMIN BOSILDI!", message.from_user.id)
     
-    # Agar bu yerda admin ID tekshirilsa, masalan:
-    # if message.from_user.id not in ADMIN_IDS:
-    #     return
-    
-    # Qolgan admin panel kodi...
+    if message.from_user.id not in ADMIN_IDS:
+        bot.send_message(message.chat.id, "Siz admin emassiz!")
+        return
+        
+    # MANA BU QATOR PANELNI TELEGRAMDA CHIQARIB BERADI:
+    bot.send_message(
+        message.chat.id,
+        "Xush kelibsiz, Admin panel:",
+        reply_markup=admin_menu()  # <--- Mana shu yerda sizning admin_menu() funksiyangiz chaqirilishi kerak!
+    )
 
 
 @bot.message_handler(func=lambda message: message.text in {"⬅️ Orqaga", "⚪️ Bekor qilish"})
