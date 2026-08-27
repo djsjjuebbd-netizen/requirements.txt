@@ -480,19 +480,19 @@ def handle_admin_state(message: types.Message) -> None:
         bot.send_message(message.chat.id, f"✅ Kino saqlandi. Kod: <code>{code}</code>", reply_markup=admin_menu())
 
 
-@flask_app.get("/")
+@app.route("/")
 def healthcheck():
     return {"ok": True, "service": "telegram-kino-bot", "db": MONGODB_DB}
 
-
-@flask_app.post(f"/webhook/{WEBHOOK_SECRET}")
-def telegram_webhook():
-    if request.headers.get("content-type") != "application/json":
+@app.route(f"/webhook/{WEBHOOK_SECRET}", methods=["POST"])
+def webhook():
+    if request.headers.get("content-type") == "application/json":
+        json_string = request.get_data().decode("utf-8")
+        update = types.Update.de_json(json_string)
+        bot.process_new_updates([update])
+        return {"ok": True}
+    else:
         abort(403)
-    update = types.Update.de_json(request.get_data().decode("utf-8"))
-    bot.process_new_updates([update])
-    return {"ok": True}
-
 
 def setup_webhook() -> None:
     if PUBLIC_BASE_URL:
