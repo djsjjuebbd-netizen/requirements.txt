@@ -46,17 +46,19 @@ admin_states: dict[int, dict[str, Any]] = {}
 
 @bot.message_handler(commands=["start"])
 def start(message: types.Message) -> None:
-        print(">>> START BOSILDI!", message.from_user.id)
-        save_user(message.from_user)
-        if not require_subscription(message):
-            return
+    print(">>> START BOSILDI!", message.from_user.id)
+    save_user(message.from_user)
+    if not require_subscription(message):
+        return
+    
     args = message.text.split(maxsplit=1)
     if len(args) == 2:
         show_movie_by_code(message.chat.id, args[1].strip())
         return
+        
     bot.send_message(
         message.chat.id,
-        "ASSALOMU ALEYKUM\n\nXUSH KELIBSIZ\n\nKINO KODINI YUBORING",
+        "ASSALOM ALEYKUM\n\nXUSH KELIBSIZ\n\nKINO KODINI YUBORING",
         reply_markup=start_keyboard(),
     )
 
