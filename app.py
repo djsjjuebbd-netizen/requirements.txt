@@ -15,11 +15,8 @@ load_dotenv()
 app = Flask(__name__)
 
 BOT_TOKEN = os.getenv("BOT_TOKEN", "").strip()
-ADMIN_IDS = {
-    int(admin_id)
-    for admin_id in os.getenv("6968399046", os.getenv("OWNER_ID", "6968399046")).replace(" ", "").split(",")
-    if admin_id.isdigit()
-}
+admin_str = os.getenv("ADMIN_IDS", os.getenv("OWNER_ID", "6968399046"))
+ADMIN_IDS = {int(i.strip()) for i in admin_str.replace(" ", "").split(",") if i.strip().isdigit()}
 MONGODB_URI = os.getenv("MONGODB_URI", "").strip()
 MONGODB_DB = os.getenv("MONGODB_DB", "telegram_kino_bot").strip()
 WEBHOOK_SECRET = os.getenv("WEBHOOK_SECRET", "kino-bot-secret").strip()
