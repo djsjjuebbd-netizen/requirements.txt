@@ -40,7 +40,7 @@ users_col = mongo_db["users"]
 channels_col = mongo_db["mandatory_channels"]
 movies_col = mongo_db["movies"]
 
-bot = TeleBot(BOT_TOKEN, parse_mode="HTML", threaded=True)
+bot = TeleBot(BOT_TOKEN, parse_mode="HTML", threaded=False)
 app = Flask(__name__)
 admin_states: dict[int, dict[str, Any]] = {}
 
