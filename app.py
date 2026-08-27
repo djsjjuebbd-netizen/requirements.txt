@@ -14,7 +14,7 @@ load_dotenv()
 # Mana buni qo'shish kerak:
 app = Flask(__name__)
 
-BOT_TOKEN = os.getenv("BOT_TOKEN", "8468837248:AAGuk-iLjxFc8Mj8IhxSOBsLMXXvqNW4XT4").strip()
+BOT_TOKEN = os.getenv("BOT_TOKEN", "").strip()
 ADMIN_IDS = {
     int(admin_id)
     for admin_id in os.getenv("ADMIN_IDS", os.getenv("OWNER_ID", "6968399046")).replace(" ", "").split(",")
