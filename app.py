@@ -11,6 +11,9 @@ from telebot import TeleBot, types
 
 load_dotenv()
 
+# Mana buni qo'shish kerak:
+app = Flask(__name__)
+
 BOT_TOKEN = os.getenv("8468837248:AAGuk-iLjxFc8Mj8IhxSOBsLMXXvqNW4XT4", "8468837248:AAGuk-iLjxFc8Mj8IhxSOBsLMXXvqNW4XT4").strip()
 ADMIN_IDS = {
     int(admin_id)
