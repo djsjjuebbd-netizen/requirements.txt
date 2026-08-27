@@ -44,6 +44,24 @@ bot = TeleBot(BOT_TOKEN, parse_mode="HTML", threaded=True)
 app = Flask(__name__)
 admin_states: dict[int, dict[str, Any]] = {}
 
+ @bot.message_handler(commands=["start"])
+    def start(message: types.Message) -> None:
+        print(">>> START BOSILDI!", message.from_user.id)
+        save_user(message.from_user)
+        if not require_subscription(message):
+            return
+    args = message.text.split(maxsplit=1)
+    if len(args) == 2:
+        show_movie_by_code(message.chat.id, args[1].strip())
+        return
+    bot.send_message(
+        message.chat.id,
+        "ASSALOMU ALEYKUM\n\nXUSH KELIBSIZ\n\nKINO KODINI YUBORING",
+        reply_markup=start_keyboard(),
+    )
+
+
+
 STYLE_PRIMARY = "primary"
 STYLE_SUCCESS = "success"
 STYLE_DANGER = "danger"
@@ -235,23 +253,6 @@ def broadcast_photo(file_id: str, caption: str) -> tuple[int, int]:
             failed += 1
     return ok, failed
     
-    @bot.message_handler(commands=["start"])
-    def start(message: types.Message) -> None:
-        print(">>> START BOSILDI!", message.from_user.id)
-        save_user(message.from_user)
-        if not require_subscription(message):
-            return
-    args = message.text.split(maxsplit=1)
-    if len(args) == 2:
-        show_movie_by_code(message.chat.id, args[1].strip())
-        return
-    bot.send_message(
-        message.chat.id,
-        "ASSALOMU ALEYKUM\n\nXUSH KELIBSIZ\n\nKINO KODINI YUBORING",
-        reply_markup=start_keyboard(),
-    )
-
-
 @bot.message_handler(commands=["admin"])
 def admin(message: types.Message) -> None:
     if not is_admin(message.from_user.id):
