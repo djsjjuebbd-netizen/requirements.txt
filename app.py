@@ -67,7 +67,7 @@ STYLE_DANGER = "danger"
 
 
 def rbtn(text: str, style: str = STYLE_PRIMARY) -> types.KeyboardButton:
-    return types.KeyboardButton(text, style=style)
+    return types.KeyboardButton(text)
 
 
 def ibtn(text: str, style: str = STYLE_PRIMARY, **kwargs: Any) -> types.InlineKeyboardButton:
