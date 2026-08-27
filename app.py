@@ -17,7 +17,7 @@ app = Flask(__name__)
 BOT_TOKEN = os.getenv("BOT_TOKEN", "").strip()
 ADMIN_IDS = {
     int(admin_id)
-    for admin_id in os.getenv("ADMIN_IDS", os.getenv("OWNER_ID", "6968399046")).replace(" ", "").split(",")
+    for admin_id in os.getenv("6968399046", os.getenv("OWNER_ID", "6968399046")).replace(" ", "").split(",")
     if admin_id.isdigit()
 }
 MONGODB_URI = os.getenv("MONGODB_URI", "").strip()
