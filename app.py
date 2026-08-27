@@ -236,7 +236,7 @@ def broadcast_photo(file_id: str, caption: str) -> tuple[int, int]:
     return ok, failed
     
     @bot.message_handler(commands=["start"])
-def start(message: types.Message) -> None:
+    def start(message: types.Message) -> None:
     print(">>> START BOSILDI!", message.from_user.id)  # <--- Mana shu qatorni qo'shing
     save_user(message.from_user)
     if not require_subscription(message):
