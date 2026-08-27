@@ -256,12 +256,14 @@ def broadcast_photo(file_id: str, caption: str) -> tuple[int, int]:
     return ok, failed
     
 @bot.message_handler(commands=["admin"])
-def admin(message: types.Message) -> None:
-    if not is_admin(message.from_user.id):
-        bot.reply_to(message, "⛔️ Siz admin emassiz.")
-        return
-    admin_states.pop(message.from_user.id, None)
-    bot.send_message(message.chat.id, "🛠 Admin panel", reply_markup=admin_menu())
+def admin_panel(message):
+    print(">>> ADMIN BOSILDI!", message.from_user.id) # <--- Mana shu qatorni qo'shing
+    
+    # Agar bu yerda admin ID tekshirilsa, masalan:
+    # if message.from_user.id not in ADMIN_IDS:
+    #     return
+    
+    # Qolgan admin panel kodi...
 
 
 @bot.message_handler(func=lambda message: message.text in {"⬅️ Orqaga", "⚪️ Bekor qilish"})
