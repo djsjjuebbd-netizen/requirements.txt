@@ -487,6 +487,9 @@ def healthcheck():
 def webhook():
     if request.headers.get("content-type") == "application/json":
         json_string = request.get_data().decode("utf-8")
+        
+        print(">>> KELGAN UPDATE:", json_string)  # <--- Mana shu qatorni qo'shing
+        
         update = types.Update.de_json(json_string)
         bot.process_new_updates([update])
         return {"ok": True}
