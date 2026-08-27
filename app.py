@@ -45,7 +45,7 @@ app = Flask(__name__)
 admin_states: dict[int, dict[str, Any]] = {}
 
 @bot.message_handler(commands=["start"])
-    def start(message: types.Message) -> None:
+def start(message: types.Message) -> None:
         print(">>> START BOSILDI!", message.from_user.id)
         save_user(message.from_user)
         if not require_subscription(message):
